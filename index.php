@@ -1,4 +1,4 @@
-<?php echo 'sai';
+<?php phpinfo();
 /**
  * CodeIgniter
  *
