@@ -1,5 +1,4 @@
 <?php echo 'sai';
-echo 'nath';
 /**
  * CodeIgniter
  *
