@@ -1,5 +1,5 @@
-<?php echo 'demo';
-echo 'nath';
+<?php 
+
 /**
  * CodeIgniter
  *
