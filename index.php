@@ -1,4 +1,4 @@
-<?php echo 'mahadev';
+<?php 
 
 /**
  * CodeIgniter

@@ -1,4 +1,2 @@
-/vendor
-/test
 /.git
 /application/config/database.php
