@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 <?php echo 'mahadev-demo';
+=======
+<?php echo 'mahadev';
+>>>>>>> 0cb48792406c86e64ab68495424480ce0d474609
 /**
  * CodeIgniter
  *
