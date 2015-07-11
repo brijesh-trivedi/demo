@@ -1,4 +1,4 @@
-<?php
+<?php echo 'mahadev';
 echo 'sai';
 /**
  * CodeIgniter
