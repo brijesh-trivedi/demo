@@ -3,7 +3,7 @@
 if ( !defined('BASEPATH') )
 	exit('No direct script access allowed');
 
-class Recipients extends My_Controller {
+class Recipients extends MY_UserController {
     
         public function __construct()
         {

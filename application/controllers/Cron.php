@@ -8,16 +8,13 @@ class Cron extends My_Controller
     protected $sender_id = 0;
     public function __construct() {
         parent::__construct();
-        $this->load->model("corn_model");$this->load->model("message_model");
-        
+        $this->load->model("corn_model");
     }
     
     public function sender_block_checker()
     {
-        $this->message_model->get_message_stats();
-        exit();
         $shell_command = $this->shell_commad_prefix."senders test_all_senders";
-       shell_exec($shell_command);
+	shell_exec($shell_command);
 	redirect('Senders/index');
     }
     public function senderMessage()
@@ -38,7 +35,7 @@ class Cron extends My_Controller
         $this->whatsapp_lib->eventManager()->bind("onLoginFailed", array($this,"onLoginFailed"));
         $this->whatsapp_lib->eventManager()->bind("onLoginSuccess", array($this,"onLoginSuccess"));
         $this->whatsapp_lib->connect();
-            $this->whatsapp_lib->LoginWithPassword('0xtSPpNmslrKZJ4N/yU1afP708I=');
+        $this->whatsapp_lib->LoginWithPassword('0xtSPpNmslrKZJ4N/yU1afP708I=');
 
         //$response = $this->whatsapp_lib->checkCredentials();
         //var_dump($response);
@@ -184,11 +181,6 @@ class Cron extends My_Controller
     
     public function onGetMessage($mynumber, $from, $id, $type, $time, $name, $body)
     {
-        $fromParts = explode("@",$from);
-        if(!empty($fromParts) && isset($fromParts[1]))
-        {
-            $from = $fromParts[1];
-        }
         $data = array(
                     'from_number' => $from,
                     'sender_id' => $this->sender_id,

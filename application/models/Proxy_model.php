@@ -4,9 +4,6 @@ if ( !defined('BASEPATH') )
 	exit('No direct script access allowed');
 
 class Proxy_model extends CI_Model {
-
-    public $perPage = NULL;
-
 	public function __construct(){
         parent::__construct();
     }
@@ -37,9 +34,7 @@ class Proxy_model extends CI_Model {
 
 		return $result;
     }
-
-    public function getProxyDataQueryWithCriteria($criteria="", $limit=null, $start=0) {
-
+    public function getProxyDataWithCriteria($criteria=""){
         $this->db->select('*');
         $this->db->from('proxies');
         if(isset($criteria) && count($criteria) > 0){
@@ -47,30 +42,8 @@ class Proxy_model extends CI_Model {
                 $this->db->where($key, $value);
             }
         }
-
-        if( is_null($limit) )
-        {
-            $this->db->offset($start);
-        }
-        else
-        {
-            $this->db->limit($limit, $start);
-        }
-
-        return $this->db;
-    }
-    public function getProxyDataCountWithCriteria($criteria="", $limit=null, $start=0) {
-
-        $this->getProxyDataQueryWithCriteria( $criteria, $limit, $start );
-
-        return $this->db->count_all_results();
-    }
-    public function getProxyDataWithCriteria($criteria="", $limit=null, $start=0){
-
-        $this->getProxyDataQueryWithCriteria( $criteria, $limit, $start );
         $query = $this->db->get();
         $result = $query->result(); 
-        
         if($result)
             return $result;
         else

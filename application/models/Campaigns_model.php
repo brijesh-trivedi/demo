@@ -25,7 +25,6 @@ class Campaigns_model extends CI_Model
         {
             $this->db->where("id", $id);
         }
-        $this->db->order_by("id", 'DESC');
         $query = $this->db->get();
         $result = $query->result();
         return $result;

@@ -3,7 +3,7 @@
 if ( !defined('BASEPATH') )
 	exit('No direct script access allowed');
 
-class Settings extends My_Controller {
+class Settings extends MY_UserController {
 
 	/**
 	 * index method

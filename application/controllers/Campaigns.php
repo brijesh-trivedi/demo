@@ -3,7 +3,7 @@
 if ( !defined('BASEPATH') )
 	exit('No direct script access allowed');
 
-class Campaigns extends My_Controller {
+class Campaigns extends MY_UserController {
 
 	/**
 	 * Class Constructor method
@@ -118,8 +118,6 @@ class Campaigns extends My_Controller {
 	public function add() {
 	
 		if($this->input->is_ajax_request()){
-			
-			
 			$message_type = $this->input->post('message_type');
 			$campaign_name = $this->input->post('name');
 			$recipientList = $this->input->post('main_recipients');
@@ -137,8 +135,7 @@ class Campaigns extends My_Controller {
 			}else if($message_type == "audio" && $audio == ""){
 				$this->form_validation->set_rules('audio', 'Audio', 'required|trim');
 			}else if($message_type == "contact" && $contact == ""){
-				$this->form_validation->set_rules("contact[contact_name]", 'Contact', 'required|trim');
-				$this->form_validation->set_rules("contact[contact_number]", 'Contact', 'required|trim');
+				$this->form_validation->set_rules('contact', 'Contact', 'required|trim');
 			}else if($message_type == "image" && $image == ""){
 				$this->form_validation->set_rules('image', 'Image', 'required|trim');
 			}else if($message_type == "location" && $locationname == ""){
@@ -155,9 +152,8 @@ class Campaigns extends My_Controller {
 					$message_data =  $video;
 				}else if($message_type == "audio" && $video != ""){
 					$message_data =  $video;
-				}else if($message_type == "contact" && $contact != ""){
-					$contact = json_encode(array('contact_name'=>$contact['contact_name'], 'contact_number'=> $contact['contact_number']));
-					$message_data =  $contact;
+				}else if($message_type == "contact" && $video != ""){
+					$message_data =  $video;
 				}else if($message_type == "image" && $image != ""){
 					$message_data =  $image;
 				}else if($message_type == "location" && $locationname != ""){
@@ -169,7 +165,7 @@ class Campaigns extends My_Controller {
 				$campiagnInsertData['message_data'] = $message_data;
 				$message_type = ucfirst($message_type);
 				$campiagnInsertData['message_type'] = $message_type;
-				$campiagnInsertData['status'] = CAMPAIGN_WAITING;
+				$campiagnInsertData['status'] = ACTIVE;
 				$campiagnInsertData['scheduled_at'] = CURRENT_DATE_TIME;
 				$campiagnInsertData['updated_at'] = CURRENT_DATE_TIME;
 

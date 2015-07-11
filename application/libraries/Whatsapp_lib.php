@@ -2,7 +2,6 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 include APPPATH.'third_party/whatsapp/src/whatsprot.class.php';
 include APPPATH.'third_party/whatsapp/src/events/MyEvents.php';
-include APPPATH.'third_party/whatsapp/src/vCard.php';
 
 class Whatsapp_lib extends WhatsProt{
 
@@ -181,17 +180,5 @@ class Whatsapp_lib extends WhatsProt{
 
         return $buff;
     }
-
-     public function creatVCard($data=array()){
-        $v = new vCard();
-
-        $v->set('data', array(
-            'first_name' => $data['contact_name'],
-            'last_name' => '',
-            'cell_tel' => $data['contact_number'],
-        ));
-
-        return $v->show();
-    }
-
+    
 }

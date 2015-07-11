@@ -73,10 +73,8 @@
 											</div>
 										</div><!-- /.tab-pane -->
 										<div class="tab-pane" id="tab_5">
-											<label>Contact name</label>
-											<input type="text" value="" name="contact[contact_name]" class="form-control" placeholder="Contact Fullname">
-											<label>Contact number</label>
-											<input type="text" value="" name="contact[contact_number]" class="form-control" placeholder="Contact Number">
+											<label>Contact</label>
+											<input type="text" value="" name="contact" class="form-control" placeholder="Contact">
 										</div><!-- /.tab-pane -->
 										<div class="tab-pane" id="tab_6">
 											<label>Location</label>
