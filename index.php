@@ -1,9 +1,5 @@
-<<<<<<< HEAD
-<?php echo 'sai-nath';
-=======
 <?php echo 'sai-mahadev';
 echo 'demo';
->>>>>>> ecd4b81832c6d3afcff38f754ddbcde7df161cb4
 /**
  * CodeIgniter
  *
