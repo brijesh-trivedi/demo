@@ -3,7 +3,7 @@
 if ( !defined('BASEPATH') )
 	exit('No direct script access allowed');
 
-class Page extends My_Controller {
+class Page extends MY_UserController {
 
 	/**
 	 * Index Page for this controller.
@@ -20,6 +20,11 @@ class Page extends My_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see http://codeigniter.com/user_guide/general/urls.html
 	 */
+        function __construct()
+        {
+          parent::__construct();
+         
+        } 
 	public function index() {
 //		$this->load->library('Whatsapp_lib');
 		$content = $this->load->view('pages/index', null, true);
