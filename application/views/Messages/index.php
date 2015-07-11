@@ -13,9 +13,10 @@
 	<!-- Start status -->
 	<div class="row"> 
 		<section class="content-header">
-			<span class="btn btn-primary btn-xs margin-bottom "><?php echo _('Total messages'); ?>: <span>4627</span></span>
-			<span class="btn btn-success btn-xs margin-bottom"><?php echo _('Text messages'); ?> : <span>4465</span></span>
-			<span class="btn btn-success btn-xs margin-bottom"><?php echo _('Media messages'); ?> : <span>162</span></span>
+            <?php $total = 0; foreach($messageStats as $stats): $total += $stats->cnt; ?>
+                <span class="btn btn-success btn-xs margin-bottom"><?php echo ucfirst($stats->type). _(' messages'); ?> : <span><?php echo $stats->cnt ?></span></span>
+            <?php endforeach; ?>
+            <span class="btn btn-primary btn-xs margin-bottom "><?php echo _('Total messages'); ?>: <span><?php echo $total ?></span></span>
 		</section>
 	</div>
 	<!-- End status -->
@@ -24,7 +25,7 @@
 		<div class="col-md-12">
 			<div class="box">
                 <div class="box-header">
-					<h3 class="box-title"><?php echo _('Receivers list'); ?></h3>
+					<h3 class="box-title"><?php echo _('Message list'); ?></h3>
                 </div><!-- /.box-header -->
                 <div class="box-body">
 					<div class="table-responsive">
@@ -39,56 +40,16 @@
 								</tr>
 							</thead>
 							<tbody>
+                                <?php foreach($messageData as $message): ?>
 								<tr>
-									<td>2015-06-15 17:51:02</td>
-									<td>mohdzishanali007 (918712744304-1433794745) | <br/><?php echo anchor('Messages/index/#', '<i class="fa fa-fw fa-eye-slash"></i> Add to blacklist') ?></td>
-									<td>2348174651106</td>
-									<td>media</td>
+									<td><?php echo $message->received_at ?></td>
+									<td><?php echo $message->from_number ?><br/><?php echo anchor('Messages/index/#', '<i class="fa fa-fw fa-eye-slash"></i> Add to blacklist') ?></td>
+									<td><?php echo $message->phone;?></td>
+									<td><?php echo $message->type ?></td>
 									<td><?php echo anchor('Messages/index/#', '<i class="fa fa-fw fa-link"></i> Link') ?></td>														
 								</tr>
-								<tr>
-									<td>2015-06-15 17:51:02</td>
-									<td>mohdzishanali007 (918712744304-1433794745) | <br/><?php echo anchor('Messages/index/#', '<i class="fa fa-fw fa-eye-slash"></i> Add to blacklist') ?></td>
-									<td>2348174651106</td>
-									<td>media</td>
-									<td><?php echo anchor('Messages/index/#', '<i class="fa fa-fw fa-link"></i> Link') ?></td>														
-								</tr>
-								<tr>
-									<td>2015-06-15 17:51:02</td>
-									<td>mohdzishanali007 (918712744304-1433794745) | <br/><?php echo anchor('Messages/index/#', '<i class="fa fa-fw fa-eye-slash"></i> Add to blacklist') ?></td>
-									<td>2348174651106</td>
-									<td>media</td>
-									<td><?php echo anchor('Messages/index/#', '<i class="fa fa-fw fa-link"></i> Link') ?></td>														
-								</tr>
-								<tr>
-									<td>2015-06-15 17:51:02</td>
-									<td>mohdzishanali007 (918712744304-1433794745) | <br/><?php echo anchor('Messages/index/#', '<i class="fa fa-fw fa-eye-slash"></i> Add to blacklist') ?></td>
-									<td>2348174651106</td>
-									<td>media</td>
-									<td><?php echo anchor('Messages/index/#', '<i class="fa fa-fw fa-link"></i> Link') ?></td>														
-								</tr>
-								<tr>
-									<td>2015-06-15 17:51:02</td>
-									<td>mohdzishanali007 (918712744304-1433794745) | <br/><?php echo anchor('Messages/index/#', '<i class="fa fa-fw fa-eye-slash"></i> Add to blacklist') ?></td>
-									<td>2348174651106</td>
-									<td>media</td>
-									<td><?php echo anchor('Messages/index/#', '<i class="fa fa-fw fa-link"></i> Link') ?></td>														
-								</tr>
-								<tr>
-									<td>2015-06-15 17:51:02</td>
-									<td>mohdzishanali007 (918712744304-1433794745) | <br/><?php echo anchor('Messages/index/#', '<i class="fa fa-fw fa-eye-slash"></i> Add to blacklist') ?></td>
-									<td>2348174651106</td>
-									<td>media</td>
-									<td><?php echo anchor('Messages/index/#', '<i class="fa fa-fw fa-link"></i> Link') ?></td>														
-								</tr>
-								<tr>
-									<td>2015-06-15 17:51:02</td>
-									<td>mohdzishanali007 (918712744304-1433794745) | <br/><?php echo anchor('Messages/index/#', '<i class="fa fa-fw fa-eye-slash"></i> Add to blacklist') ?></td>
-									<td>2348174651106</td>
-									<td>media</td>
-									<td><?php echo anchor('Messages/index/#', '<i class="fa fa-fw fa-link"></i> Link') ?></td>														
-								</tr>
-						</table>
+                                <?php endforeach; ?>
+				            </table>
 					</div>
                 </div>
 			</div>

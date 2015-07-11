@@ -486,6 +486,7 @@ class Senders extends My_Controller
             $password=$value->password;
             $nickname=$value->nickname;
             $params = array('number' => $phone, 'nickname' => '','debug'=>true);
+           
             $this->load->library('whatsapp_lib',$params);
             $proxy_response = $this->whatsapp_lib->connect_with_proxy($value->ip_address,$value->port,$value->username,$value->pPassword);
             $this->whatsapp_lib->eventManager()->bind("onLoginFailed", array($this,"onLoginFailed"));

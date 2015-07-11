@@ -99,13 +99,89 @@
 
 <!-- Delete Modal -->
 <?php echo $this->load->view('pages/delete_popup', null, true); ?>
+
 <!-- Delete Modal -->
 <script type="text/javascript">
-$("#test_all").click(function (){
-	$('#test_all').html("Test proxies in progress");
-	$('#test_all').attr('disabled', 'disabled');
-	//$('.showLoder').show();
-	//$('#opacitylow').css({'opacity': 0.5});
-	//$('.showLoder').css({'opacity': 2.0});
-});
+	$("#test_all").click(function (){
+		$('#test_all').html("Test proxies in progress");
+		$('#test_all').attr('disabled', 'disabled');
+		//$('.showLoder').show();
+		//$('#opacitylow').css({'opacity': 0.5});
+		//$('.showLoder').css({'opacity': 2.0});
+	});
+</script>
+
+<script type="text/javascript">
+	//
+	// DataTables initialisation
+	//
+	$(document).ready(function() {
+	    $('#example2').dataTable( {
+	    	"ordering" : false,
+	    	"searching" : false,
+	        "processing": true,
+	        "serverSide": true,
+	        "ajax": $.fn.dataTable.pipeline( {
+	            url: "<?php echo site_url('Proxies/listing'); ?>",
+	            pages: 5 // number of pages to cache
+	        } ),
+	        "columns" : [
+	        	{data: 'id'},
+	        	{data: 'ip_address'},
+	        	{data: 'port'},
+	         	{data: 'username'},
+	        	{data: 'password'},
+	        	{data: 'status', sClass: 'status-col', createdCell: renderStatus},
+	        	{data: 'updated_at_2'},
+	        	{data: 'created_at_2'},
+	        	{data: 'id', createdCell: renderActions}
+	        ]
+	    } );
+	} );
+
+
+	$('#example2').on( 'draw.dt', function () {
+	    
+	} );
+
+	function renderStatus(obj, val, data) {
+		var html = "";
+		var jObj = $(obj);
+
+		if( val == "1")
+		{
+			html = ""+
+			'<button disabled="disabled" class="table-status btn btn-block btn-success btn-flat">' + 
+				'<i class="fa fa-thumbs-o-up"></i> Active' +
+			'</button>';
+		}
+		else
+		{
+			html = "" +
+			'<button disabled="disabled" class="table-status btn btn-block btn-danger btn-flat">' +
+				'<i class="fa fa-thumbs-o-down"></i> Inactive' +
+			'</button>';
+		}
+
+		jObj.attr("align", "center").html(html);
+	}
+
+	function renderActions(obj, val, data) {
+
+		var html = "";
+		var jObj = $(obj);
+
+		html = "" +
+		'<div class="btn-group btn-group">'+
+			'<a data-ip-port="#" data-proxy-id="7701" data-target="#test_proxy" href="<?php echo base_url(); ?>Proxies/testproxy/'+ val +'" class="btn btn-primary btn-flat test-proxy" title="Test"><i class="fa fa-eye"></i></a>' +
+			'<a data-proxy-password="vBL472cc" data-proxy-username="saudalq" data-proxy-port="29842" data-proxy-ip="23.105.165.7" data-proxy-id="7701" class="btn btn-info btn-flat edit" title="Edit" href="<?php echo base_url(); ?>Proxies/edit/'+ val +'"><i class="fa fa-edit"></i>' +
+			'</a>' +
+			'<a data-target="#delete_confirm" data-toggle="modal" class="btn btn-danger btn-flat delete deleteLinkButton" title="Delete" id="'+ val +'"><i class="fa fa-trash"></i> </a>' +
+			'<span id="anchor_'+ val +'" style="display:none;">' +
+				'<a href="<?php echo base_url(); ?>Proxies/delete/'+ val +'" class="btn btn-default">Delete</a></span>' +
+		'</div>';
+
+		jObj.html(html);
+	}
+
 </script>

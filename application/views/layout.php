@@ -82,6 +82,10 @@
 		<script src="<?php echo base_url(); ?>assets/js/jquery.validate.min.js"></script>
 		<!-- Bootstrap 3.3.2 JS -->
 		<script src="<?php echo base_url(); ?>assets/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+		<script src="<?php echo base_url(); ?>assets/plugins/datatables/jquery.dataTables.min.js" type="text/javascript"></script>
+		<script src="<?php echo base_url(); ?>assets/plugins/datatables/dataTables.bootstrap.min.js" type="text/javascript"></script>
+		<script src="<?php echo base_url(); ?>assets/plugins/datatables/jquery.dataTables.pipeline.js" type="text/javascript"></script>
+		
 		<!-- Sparkline -->   
 		<script src="<?php echo base_url(); ?>assets/plugins/sparkline/jquery.sparkline.min.js" type="text/javascript"></script>
 

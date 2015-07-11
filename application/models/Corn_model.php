@@ -36,10 +36,10 @@ class Corn_model extends CI_Model
     	$this->db->from('queues');
         $this->db->join('senders', 'queues.sender_id = senders.id');
         $this->db->join('proxies', 'senders.proxy_id = proxies.id');
-    	$this->db->where("queues.status", 1);
-        $this->db->where('queues.updated_at >=', $fromDays10);
-        $this->db->where('queues.updated_at <=', $today);
-        $this->db->group_by('queues.sender_id'); 
+    	$this->db->where("queues.status", QUEUE_COMPLETE);
+        $this->db->where('Date(queues.updated_at) >=', $fromDays10);
+        $this->db->where('Date(queues.updated_at) <=', $today);
+        $this->db->group_by('queues.sender_id');
     	$query = $this->db->get();
         $result = $query->result();
         return $result;

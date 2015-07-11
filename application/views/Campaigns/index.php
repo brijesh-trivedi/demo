@@ -46,9 +46,21 @@
 										</td>
 										<td>
 											<div class="btn-group btn-group">
+												<?php //echo anchor('Queues/processQueue/'.$value->id, '<i class="fa fa-play-circle-o"></i>','class="btn btn-primary btn-flat test-proxy"') ?>
+												<?php if ($value->status == CAMPAIGN_WAITING) { ?> 
+
+												<a data-target="#run_confirm" data-toggle="modal" class="btn btn-success btn-flat edit runcampaign" title="Run Campaign" id="<?php echo $value->id; ?>"><i class="fa fa-play-circle-o"></i> </a>
+												<span id="anchor_c_<?php echo $value->id; ?>" style="display:none;">
+													<a href="<?php echo base_url(); ?>Queues/processQueue/<?php echo $value->id; ?>" class="btn btn-default">Run Campaign</a></span>												
+												<?php } ?>
+
 												<?php echo anchor('Campaigns/ques_campaign/'.$value->id, '<i class="fa fa-pencil"></i>','class="btn btn-primary btn-flat test-proxy"') ?>
 												<a data-target="#edit_proxy" data-toggle="modal" class="btn btn-info btn-flat edit" title="Export report"><i class="fa fa-fw fa-file-text-o"></i></a>
-												<a data-target="#delete_confirm" href="<?php echo base_url(); ?>Campaigns/delete/<?php echo $value->id;?>" class="btn btn-danger btn-flat delete" title="Delete"><i class="fa fa-trash"></i> </a>
+												
+												<a data-target="#delete_confirm" data-toggle="modal" class="btn btn-danger btn-flat delete deleteLinkButton" title="Delete" id="<?php echo $value->id; ?>"><i class="fa fa-trash"></i> </a>
+												<span id="anchor_<?php echo $value->id; ?>" style="display:none;">
+													<a href="<?php echo base_url(); ?>Campaigns/delete/<?php echo $value->id; ?>" class="btn btn-default">Delete</a>
+												</span>
 											</div>
 										</td>
 									</tr>
@@ -61,3 +73,37 @@
 	</div>
 	<!-- End table -->
 </section>
+<!-- Delete Modal -->
+<?php echo $this->load->view('pages/delete_popup', null, true); ?>
+<!-- Delete Modal -->
+<!-- Modal -->
+<div id="run_confirm" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Run Campaign</h4>
+      </div>
+      <div class="modal-body">
+        <p>Do you want to run this campaign?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <span id="campaign_run_anchor_tag_content"></span>
+      </div>
+    </div>
+
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function (){
+	$('.runcampaign').click(function() {
+		var recordId = $(this).attr('id');
+		var anchor_tag_html = $('#anchor_c_' + recordId).html();
+		$('#campaign_run_anchor_tag_content').html(anchor_tag_html);
+	});
+	
+});
+</script>

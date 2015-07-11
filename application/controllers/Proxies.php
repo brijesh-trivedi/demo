@@ -16,12 +16,41 @@ class Proxies extends My_Controller {
 	 * index method
 	 */
 	public function index() {
-		
-		$data['proxyData'] = $this->proxy_model->getProxyData();
+
+		$data['proxyData'] = []; //$this->proxy_model->getProxyDataWithCriteria([], 10, 0);
 		$data['counter'] = $this->proxy_model->getCustomData();
 
+		
 		$content = $this->load->view('Proxies/index', $data, true);
 		$this->render($content);
+	}
+
+	/**
+	 * list method
+	 */
+	public function listing() {
+		$start = $this->input->get('start', 0);
+		$limit = $this->input->get('length', 50);
+		$draw = $this->input->get('draw', 1);
+
+		$proxyDataCount = $this->proxy_model->getProxyDataCountWithCriteria([]);
+		$proxyData = $this->proxy_model->getProxyDataWithCriteria([], $limit, $start);
+
+		foreach($proxyData as &$proxy)
+		{
+			$proxy->updated_at_2 = humanTiming(strtotime($proxy->updated_at));
+			$proxy->created_at_2 = date("F j, Y, g:i a", strtotime($proxy->created_at));
+		}
+		
+		$data = [
+			"draw" => $draw,
+			"recordsTotal" => $proxyDataCount,
+			"recordsFiltered" => $proxyDataCount,
+			"data" => $proxyData
+		];
+
+		echo json_encode($data);
+		
 	}
 
 	/**
@@ -257,7 +286,7 @@ class Proxies extends My_Controller {
 	public function test_all_proxies()
 	{
 		//$shell_command = base_url()."Proxies/test_with_shell  > /dev/null 2>/dev/null &";
-		$shell_command = "php index.php Proxies test_with_shell";
+		$shell_command = "php index.php Proxies test_with_shell > /dev/null 2>/dev/null &";
 		shell_exec($shell_command);
 		redirect('Proxies/index');
 	}

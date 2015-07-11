@@ -38,10 +38,11 @@ class Queues_model extends CI_Model
         $this->db->join($this->proxyTableName. " as p", "p.id = s.proxy_id");
         $this->db->where("q.campaign_id", $campaign_id);
         if($execute){
-            $this->db->where("q.status", 0);    
+            $this->db->where("q.status !=", 2);    
         }
         $query = $this->db->get();
         $result = $query->result();
+        
         return $result;
     }
 

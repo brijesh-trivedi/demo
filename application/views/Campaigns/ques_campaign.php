@@ -3,16 +3,27 @@
 	<!-- Start buttons -->
 	<div class="row"> 
 		<div class="col-md-10">			
-			<?php echo anchor('Queues/processQueue/'.$campaign_id, 'Start Sending Messages', 'id="startqueue" class="btn btn-info btn-flat status"') ?>			
+			<?php //echo anchor('Queues/processQueue/'.$campaign_id, 'Start Sending Messages', 'id="startqueue" class="btn btn-info btn-flat status"') ?>			
 		</div>			
 	</div>
 	<!-- End buttons -->
+	<?php 
+	$sent = 0;
+	$remain = 0;
+	foreach ($queueDetails as $key => $value) {
+		if($value->status == 2){
+			$sent++;
+		}else{
+			$remain++;
+		}
+	}
+	?>
 	<!-- Start status -->
 	<div class="row"> 
 		<section class="content-header">
 			<span class="btn btn-primary btn-xs margin-bottom "><?php echo _('Total ques'); ?>: <span><?php echo count($queueDetails); ?></span></span>
-			<span class="btn btn-default btn-xs margin-bottom "><?php echo _('Remaining'); ?>: <span>0</span></span>
-			<span class="btn btn-success btn-xs margin-bottom"><?php echo _('Sent'); ?> : <span>102</span></span>
+			<span class="btn btn-default btn-xs margin-bottom "><?php echo _('Remaining'); ?>: <span><?php echo $remain; ?></span></span>
+			<span class="btn btn-success btn-xs margin-bottom"><?php echo _('Sent'); ?> : <span><?php echo $sent; ?></span></span>
 			<span class="btn bg-navy btn-xs margin-bottom"><?php echo _('Sending'); ?> : <span>Completed</span></span>				
 			<span class="btn bg-navy btn-xs margin-bottom"><?php echo _('Importing'); ?> : <span>Completed</span></span>				
 		</section>
@@ -49,11 +60,11 @@
 										<td><?php echo $value->message_type; ?></td>
 										<td align="center">
 											<?php 
-											if($value->status == 1){ ?>
-												<span class="label label-warning">Pending</span>
-											<?php	
-											}else if($value->status == 2){ ?>
+											if($value->status == 2){ ?>
 												<span class="label label-success">Finished - Sent</span>
+											<?php	
+											}else{ ?>
+												<span class="label label-warning">Pending</span>
 											<?php
 											}
 											?>
