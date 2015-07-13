@@ -1,16 +1,1 @@
-/bootstrap/compiled.php
-uploads
-vendor
-.idea
-nbproject
-composer.phar
-.env.*.php
-.env.php
-.DS_Store
-Thumbs.db
-*.dat
-composer.lock
-*.db
-application/third_party/whatsapp/src/wadata/media/WHA16A5.tmp
-*.tmp
-assets/images/symbol.png
+/.git
