@@ -1,0 +1,1 @@
+<link href="<?php echo getConfig('siteUrl',$sAppName).'/css/style.css' ?>" rel="stylesheet" type="text/css" />
